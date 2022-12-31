@@ -39,7 +39,7 @@ export default function UserHeaderNav() {
           <MyPhotosIcons />
           {mobile && "Minhas Fotos"}
         </NavLink>
-        <NavLink to="/conta/estaticas" activeClassName={styles.active}>
+        <NavLink to="/conta/estatisticas" activeClassName={styles.active}>
           <StatsIcon />
           {mobile && "Estatísticas"}
         </NavLink>

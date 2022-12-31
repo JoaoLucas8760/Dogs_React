@@ -5,19 +5,22 @@ import { VictoryPie, VictoryChart, VictoryBar } from "victory";
 const UserStatsGraphs = ({ data }) => {
   const [graph, setGraph] = React.useState([]);
   const [total, setTotal] = React.useState(0);
+  console.log("TEST1 ");
+  console.log(data);
 
   React.useEffect(() => {
-    const graphData = data.map((item) => {
-      return {
-        x: item.title,
-        y: Number(item.acessos),
-      };
-    });
+    if (data.lenght === 0) {
+      return <div>É necessario fazer um post para ver as postagens</div>;
+    } else {
+      const graphData = data.map((item) => {
+        return {
+          x: item.title,
+          y: Number(item.acessos),
+        };
+      });
 
-    setTotal(
-      data.map(({ acessos }) => Number(acessos)).reduce((a, b) => a + b)
-    );
-    setGraph(graphData);
+      setGraph(graphData);
+    }
   }, [data]);
 
   return (
