@@ -1,26 +1,31 @@
 import React from "react";
 import styles from "./UserStatsGraphs.module.css";
-import { VictoryPie, VictoryChart, VictoryBar } from "victory";
+import { VictoryPie, VictoryChart, VictoryBar, Data } from "victory";
 
 const UserStatsGraphs = ({ data }) => {
   const [graph, setGraph] = React.useState([]);
   const [total, setTotal] = React.useState(0);
-  console.log("TEST1 ");
-  console.log(data);
+
+  console.log("DATA:", data);
 
   React.useEffect(() => {
-    if (data.lenght === 0) {
-      return <div>É necessario fazer um post para ver as postagens</div>;
-    } else {
-      const graphData = data.map((item) => {
-        return {
-          x: item.title,
-          y: Number(item.acessos),
-        };
-      });
-
-      setGraph(graphData);
+    if (data.length < 1) {
+      return;
     }
+
+    console.log("AKA");
+    console.log(data);
+    const graphData = data.map((item) => {
+      return {
+        x: item.title,
+        y: Number(item.acessos),
+      };
+    });
+
+    setTotal(
+      data.map(({ acessos }) => Number(acessos)).reduce((a, b) => a + b)
+    );
+    setGraph(graphData);
   }, [data]);
 
   return (
@@ -56,3 +61,4 @@ const UserStatsGraphs = ({ data }) => {
 };
 
 export default UserStatsGraphs;
+
